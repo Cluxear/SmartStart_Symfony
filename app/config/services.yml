@@ -28,6 +28,9 @@ services:
         resource: '../../src/AppBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
+    UserBundle\:
+        resource: '../../src/UserBundle/*'
+        exclude: '../../src/UserBundle/{Entity,Repository,Tests}'
 
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:

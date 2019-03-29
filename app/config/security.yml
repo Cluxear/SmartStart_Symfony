@@ -7,6 +7,7 @@ security:
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_FREELANCER:  ROLE_FREELANCER
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
@@ -28,6 +29,19 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
+                check_path: /login_check
+
+                # the user is redirected here when they need to log in
+                login_path: /login
+
+                # if true, forward the user to the login form instead of redirecting
+                use_forward: false
+
+                # login success redirecting options (read further below)
+                always_use_default_target_path: true
+                default_target_path:            /dashboard
+                target_path_parameter:          _target_path
+                use_referer:                    false
             logout: true
             anonymous: true
 

@@ -2,6 +2,7 @@
 
 namespace UserBundle\Controller;
 
+use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -15,10 +16,18 @@ class DefaultController extends Controller
         return $this->render('UserBundle:Default:index.html.twig');
     }
     /**
-     * @Route("/register", name="register")
-     *
+     * @Route("/dashboard", name="dashboard")
      */
-    public function getRegisterPage(){
-        return $this->render('UserBundle:Default:base.html.twig');
+    public function homeAction(){
+        $user = $this->getUser();
+        $roles = $user->getRoles();
+        if(in_array('ROLE_FREELANCER',$roles)){
+
+            return $this->render("@FOSUser\Profile\dashboard_freelancer.html.twig");
+        }
+        else {
+            return $this->render("@FOSUser\Profile\dashboard.html.twig");
+        }
     }
+
 }
