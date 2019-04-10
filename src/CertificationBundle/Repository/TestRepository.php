@@ -15,13 +15,21 @@ class TestRepository extends \Doctrine\ORM\EntityRepository
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findTestsByUserId($userId){
+    public function findTestsByUserIdWhereStatusIsActive($userId)
+    {
+        // we wanna select all of the tests in the Tests table where the id of the test for the current user in usersTests table
+        // doesnt have status blocked.
         $query = $this->getEntityManager()
             ->createQuery(
-                'SELECT T FROM CertificationBundle:Test T
-        WHERE T.User_Test_Affectation = U.User_Test_Affectation AND U.id= :id'
-            )->setParameter('id', $userId);
-
-        return $query->getOneOrNullResult();
+                'SELECT T FROM CertificationBundle:Test T 
+                     JOIN  CertificationBundle:UsersTests UT 
+                     WITH UT.test_id = T.id_test
+                     WHERE UT.user_id= :userId AND UT.status = :status1 OR UT.status = :status2 
+                     '
+            )->setParameter('status1', 'active')
+            ->setParameter('status2', 'failed')
+            ->setParameter('userId', $userId);
+        return $query;
     }
 }
+

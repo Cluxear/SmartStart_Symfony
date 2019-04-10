@@ -1,0 +1,15 @@
+{% extends ('base.html.twig') %}
+{% block content %}
+    {{ form_start(form) }}
+    {% for question in questions %}
+            <div class="form-group">
+                <label for="formGroupExampleInput"><strong>{{ question }}</strong></label>
+                {{ form_widget(form.submition[loop.index-1]) }}
+            </div>
+    {% endfor %}
+
+    <div class="text-center">
+        {{ form_widget(form.save) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

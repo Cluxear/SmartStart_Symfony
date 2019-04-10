@@ -24,7 +24,7 @@ class User extends BaseUser
     /**
      * @var int
      *
-     * @ORM\Column(name="completion_rate", type="integer")
+     * @ORM\Column(name="completion_rate", type="integer", nullable=true)
      */
     protected $completion_rate;
 

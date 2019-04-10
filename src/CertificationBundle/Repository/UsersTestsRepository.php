@@ -10,4 +10,16 @@ namespace CertificationBundle\Repository;
  */
 class UsersTestsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getNbrEssaieAndIdTest($userId){
+        $query = $this->getEntityManager()->createQuery(
+            "
+            SELECT UT FROM CertificationBundle:UsersTests UT
+            JOIN CertificationBundle:Test T WITH UT.test_id = T.id_test 
+            WHERE UT.user_id = :userId AND  UT.status = :status1 OR UT.status = :status2
+            "
+        )->setParameter('userId', $userId)
+        ->setParameter('status1', 'active')
+        ->setParameter('status2', 'failed');
+        return $query->getResult();
+    }
 }

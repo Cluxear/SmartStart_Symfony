@@ -11,6 +11,8 @@
 
 namespace UserBundle\Controller;
 
+use CertificationBundle\Entity\Test;
+use CertificationBundle\Entity\UsersTests;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
@@ -67,6 +69,27 @@ class RegistrationController extends BaseController
                 );
 
                 if (null === $response = $event->getResponse()) {
+                    /**
+                     * @var $test Test
+                     */
+                   $tests = $this->getDoctrine()->getRepository(\CertificationBundle\Entity\Test::class )->findAll();
+                   var_dump($tests);
+                   $tests_ids = array();
+                   foreach($tests as $item){
+                       array_push($tests_ids, $item->getid_test());
+                   }
+                   foreach($tests as $test){
+                       $usertest = new UsersTests();
+                       $usertest->setUserId($user);
+                       $usertest->setStatus("active");
+                       $usertest->setTestId($test);
+                       $usertest->setSubmition(array_fill(0,sizeof($test->getquestions()),""));
+                       $usertest->setNbrEssai(0);
+                       $entityManager = $this->getDoctrine()->getManager();
+                       $entityManager->persist($usertest);
+                       $entityManager->flush();
+                   }
+
                    $url = $this->generateUrl('dashboard');
                    $response = new RedirectResponse($url);
                 }

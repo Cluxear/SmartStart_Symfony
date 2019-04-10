@@ -10,4 +10,5 @@ namespace CertificationBundle\Repository;
  */
 class ExamContentRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

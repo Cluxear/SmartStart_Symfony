@@ -33,29 +33,179 @@ class Test
      * @ORM\Column(name="passing_score", type="integer")
      */
     private $passing_score;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="questions", type="array")
-     */
+/**
+* @ORM\Column(name="questions", type="array")
+*/
     private $questions;
 
+    /**
+     * @ORM\Column(name="image", type="string")
+     */
+    private $image;
 
+    /**
+     * @ORM\Column(name="level", type="string")
+     */
+    private $level;
+    /**
+     * @ORM\Column(name="summary", type="string")
+     */
+    private $summary;
+
+    /**
+     * @ORM\Column(name="success", type="integer")
+     */
+    private $success;
+
+    /**
+     * @ORM\Column(name="failure", type="integer")
+     */
+    private $failure;
+    /**
+     * @ORM\Column(name="cost", type="integer")
+     */
+    private $cost;
+    /**
+     * @ORM\Column(name="duration", type="integer")
+     */
+    private $duration;
+
+    /**
+     * @return mixed
+     */
+    public function getSuccess()
+    {
+        return $this->success;
+    }
+
+    /**
+     * @param mixed $success
+     */
+    public function setSuccess($success)
+    {
+        $this->success = $success;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFailure()
+    {
+        return $this->failure;
+    }
+
+    /**
+     * @param mixed $failure
+     */
+    public function setFailure($failure)
+    {
+        $this->failure = $failure;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
+
+    /**
+     * @param mixed $cost
+     */
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
+    /**
+     * @param mixed $duration
+     */
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @param mixed $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+    }
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param mixed $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+    }
+
+    /**
+     * @return mixed
+     */
+
+
+    public function getquestions()
+    {
+        return $this->questions;
+    }
 
     public function __construct() {
         $questions = array();
     }
 
-    // ...
-
     /**
-     * @return mixed
+     * @return string
      */
-    public function getTitreTest()
+    public function gettitre_test(): string
     {
         return $this->titre_test;
     }
+
+    // ...
+
 
     /**
      * @param mixed $titre_test
@@ -79,7 +229,7 @@ class Test
      *
      * @return int
      */
-    public function getIdTest()
+    public function getid_test()
     {
         return $this->id_test;
     }

@@ -13,12 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class UsersTests
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+ * @var int
+ *
+ * @ORM\Column(name="id", type="integer")
+ * @ORM\Id
+ * @ORM\GeneratedValue(strategy="AUTO")
+ */
     private $id;
 
     /**
@@ -32,13 +32,95 @@ class UsersTests
      */
     private $user_id;
     /**
-     * @ORM\Column(name="status", type="string", length=100)
+     * @ORM\Column(name="status", type="string", length=100, nullable=true)
      */
     private $status;
     /**
-     * @ORM\Column(name="nbr_essai", type="integer")
+     * @ORM\Column(name="nbr_essai", type="integer", nullable=true)
      */
     private $nbr_essai;
+
+    /**
+     * @return mixed
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * @param mixed $score
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+    }
+
+    /**
+     * @ORM\Column(name="submition", type="array" , nullable=true)
+     */
+    private $submition;
+    /**
+     * @ORM\Column(name="score", type="integer")
+     */
+    private $score;
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param mixed $test_id
+     */
+
+    public function setTestId($test_id)
+    {
+        $this->test_id = $test_id;
+    }
+
+    /**
+     * @param mixed $user_id
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @param mixed $nbr_essai
+     */
+    public function setNbrEssai($nbr_essai)
+    {
+        $this->nbr_essai = $nbr_essai;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSubmition() :array
+    {
+        return $this->submition;
+    }
+
+    /**
+     * @param mixed $submition
+     */
+    public function setSubmition($submition)
+    {
+        $this->submition = $submition;
+    }
 
     /**
      * @return mixed
@@ -51,7 +133,7 @@ class UsersTests
     /**
      * @return mixed
      */
-    public function getNbrEssai()
+    public function getnbr_essai()
     {
         return $this->nbr_essai;
     }
@@ -59,7 +141,7 @@ class UsersTests
     /**
      * @return mixed
      */
-    public function getTestId()
+    public function gettest_id()
     {
         return $this->test_id;
     }
@@ -83,8 +165,7 @@ class UsersTests
     }
     public function __construct()
     {
-        $this->status = "submitted";
-        $this->nbr_essai = 1;
+        $this->submition = array();
     }
 }
 
