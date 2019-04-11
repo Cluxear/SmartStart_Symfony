@@ -31,7 +31,7 @@ class DefaultController extends Controller
             $result = $paginator->paginate(
                 $testsForUser,
                 $request->query->getInt('page', 1),
-                1
+                5
             );
             return $this->render('@Certification/testslist.html.twig',array('tests' => $result, 'trials'  => $trialsLeft ));
         }
@@ -76,7 +76,7 @@ class DefaultController extends Controller
              * @var $submissions UsersTests
              */
             $submissions = $form->getData();
-            $submissions->setNbrEssai($submissions->getNbrEssai()+1);
+            $submissions->setNbrEssai($submissions->getnbr_essai()+1);
             $submissions->setStatus('submitted');
             $entityManager->merge($submissions);
             $entityManager->flush();
