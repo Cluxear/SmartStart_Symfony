@@ -2,6 +2,7 @@
 
 namespace CertificationBundle\Controller;
 
+use CertificationBundle\Entity\Notification;
 use CertificationBundle\Entity\Test;
 use CertificationBundle\Entity\UsersTests;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -58,10 +59,10 @@ class DefaultController extends Controller
         $questions = $test->getquestions();
         $form = $this->createFormBuilder($UserTestAffectation)
             ->add('submition',CollectionType::class,[
-               'entry_type' => TextType::class,
+               'entry_type' => IntegerType::class,
                     'allow_add' => true,
                     'entry_options' => [
-                        'attr' => ['placeholder' => 'Write Your answer', 'value'=> ''],
+                        'attr' => ['size'=> 10],
                     ],
                     ]
             )

@@ -15611,3 +15611,20 @@ ul.dashboard-box-list > li:hover {
 	.padding-left-90 { padding-left: 90px !important; }
 	.padding-left-95 { padding-left: 95px !important; }
 	.padding-left-100 { padding-left: 100px !important; }
+	.test-answer
+	{
+		background-color: #0088CC;
+		top: 0;
+		padding: 10px 20px;
+		line-height: 24px;
+		color: #fff;
+		position: relative;
+		font-size: 16px;
+		font-weight: 500;
+		display: inline-block;
+		transition: all 0.2s ease-in-out;
+		overflow: hidden;
+		border: 1px solid #17a2b8;
+		border-radius: 4px;
+		box-shadow: 0 4px 12px rgba(102,103,107,0.15);
+	}

@@ -11,8 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="CertificationBundle\Repository\TestRepository")
  */
 class Test
-{
-    /**
+{ /**
      * @var int
      *
      * @ORM\Column(name="id_test", type="integer")
@@ -20,8 +19,6 @@ class Test
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id_test;
-
-
 
     /**
      * @var string
@@ -34,7 +31,7 @@ class Test
      */
     private $passing_score;
 /**
-* @ORM\Column(name="questions", type="array")
+* @ORM\Column(name="questions", type="array",nullable=true)
 */
     private $questions;
 
