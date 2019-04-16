@@ -2,14 +2,18 @@
 
 namespace CertificationBundle\Controller;
 
+use CertificationBundle\Entity\Notification;
 use CertificationBundle\Entity\Test;
 use CertificationBundle\Entity\UsersTests;
+use CertificationBundle\form\TestType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Tests\User\UserTest;
 use UserBundle\Entity\User;
 
 class DefaultController extends Controller
@@ -61,7 +65,7 @@ class DefaultController extends Controller
                'entry_type' => TextType::class,
                     'allow_add' => true,
                     'entry_options' => [
-                        'attr' => ['placeholder' => 'Write Your answer', 'value'=> ''],
+                        'attr' => ['size'=> 50],
                     ],
                     ]
             )
@@ -107,5 +111,50 @@ class DefaultController extends Controller
         return $this->render('@Certification/check_submitted_test.html.twig');
 
     }
+
+    /**
+     * @Route("/addTest", name="addTest")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function addTest(Request $request){
+        $Test = new Test();
+        $Test->setQuestions(array(""));
+        $form = $this->createForm( TestType::class, $Test);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $entityManager = $this->getDoctrine()->getManager();
+            /**
+             * @var $submissions UsersTests
+             */
+            $Test = $form->getData();
+            $Users = $this->getDoctrine()->getRepository(User::class)->findAll();
+            foreach ( $Users as $user ){
+                $UserTest = new UsersTests();
+                $UserTest->setScore(0);
+                $UserTest->setStatus('active');
+                $UserTest->setCorrection(array(''));
+                $UserTest->setSubmition(array(''));
+                $UserTest->setNbrEssai(0);
+                $UserTest->setUserId($user);
+                $UserTest->setTestId($Test);
+                $entityManager->persist($UserTest);
+
+            }
+            $entityManager->persist($Test);
+            $entityManager->flush();
+            // ... perform some action, such as saving the task to the database
+            // for example, if Task is a Doctrine entity, save it!
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($task);
+            // $entityManager->flush();
+
+            return $this->redirectToRoute('addTest');
+        }
+        return $this->render('@Certification/addTest.html.twig', array('form'=> $form->createView()));
+    }
+
 
 }

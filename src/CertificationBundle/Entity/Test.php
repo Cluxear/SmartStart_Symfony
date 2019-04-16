@@ -3,7 +3,7 @@
 namespace CertificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Test
  *
@@ -11,8 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="CertificationBundle\Repository\TestRepository")
  */
 class Test
-{
-    /**
+{ /**
      * @var int
      *
      * @ORM\Column(name="id_test", type="integer")
@@ -20,8 +19,6 @@ class Test
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id_test;
-
-
 
     /**
      * @var string
@@ -34,7 +31,7 @@ class Test
      */
     private $passing_score;
 /**
-* @ORM\Column(name="questions", type="array")
+* @ORM\Column(name="questions", type="array",nullable=true)
 */
     private $questions;
 
@@ -69,6 +66,30 @@ class Test
      * @ORM\Column(name="duration", type="integer")
      */
     private $duration;
+
+    /**
+     * @param int $id_test
+     */
+    public function setIdTest(int $id_test)
+    {
+        $this->id_test = $id_test;
+    }
+
+    /**
+     * @param int $passing_score
+     */
+    public function setPassingScore(int $passing_score)
+    {
+        $this->passing_score = $passing_score;
+    }
+
+    /**
+     * @param mixed $questions
+     */
+    public function setQuestions($questions)
+    {
+        $this->questions = $questions;
+    }
 
     /**
      * @return mixed
@@ -196,13 +217,17 @@ class Test
         $questions = array();
     }
 
-    /**
-     * @return string
-     */
-    public function gettitre_test(): string
+
+    public function gettitre_test()
     {
         return $this->titre_test;
     }
+    public function getTitreTest()
+    {
+        return $this->titre_test;
+    }
+    /**
+    /**
 
     // ...
 
@@ -215,10 +240,7 @@ class Test
         $this->titre_test = $titre_test;
     }
 
-    /**
-     * @return int
-     */
-    public function getPassingScore(): int
+    public function getPassingScore()
     {
         return $this->passing_score;
     }

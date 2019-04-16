@@ -139,7 +139,7 @@
                                         "> View Your Results
                                     </a>
                                     {% elseif UserTest.status == 'passed' %}
-                                    <a href="pages-checkout-page.html" class=" btn btn-success
+                                    <a href="{{path('generate_certificate',{userTestId : UserTest.id}) }} " download="" class=" btn btn-success
                                         "> Congratulation, Check Results
                                     </a>
                                     {% else %}

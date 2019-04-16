@@ -84,6 +84,7 @@ class RegistrationController extends BaseController
                        $usertest->setStatus("active");
                        $usertest->setTestId($test);
                        $usertest->setSubmition(array_fill(0,sizeof($test->getquestions()),""));
+                       $usertest->setCorrection(array_fill(0,sizeof($test->getquestions()),""));
                        $usertest->setNbrEssai(0);
                        $entityManager = $this->getDoctrine()->getManager();
                        $entityManager->persist($usertest);

@@ -39,6 +39,34 @@ class UsersTests
      * @ORM\Column(name="nbr_essai", type="integer", nullable=true)
      */
     private $nbr_essai;
+    /**
+     * @ORM\Column(name="submition", type="array" , nullable=true)
+     */
+    private $submition;
+    /**
+     * @ORM\Column(name="score", type="integer")
+     */
+    private $score;
+    /**
+     * @ORM\Column(name="correction", type="array")
+     */
+    private $correction;
+
+    /**
+     * @return array
+     */
+    public function getCorrection()
+    {
+        return $this->correction;
+    }
+
+    /**
+     * @param array $correction
+     */
+    public function setCorrection($correction)
+    {
+        $this->correction = $correction;
+    }
 
     /**
      * @return mixed
@@ -56,14 +84,6 @@ class UsersTests
         $this->score = $score;
     }
 
-    /**
-     * @ORM\Column(name="submition", type="array" , nullable=true)
-     */
-    private $submition;
-    /**
-     * @ORM\Column(name="score", type="integer")
-     */
-    private $score;
 
     /**
      * @param int $id
@@ -139,7 +159,7 @@ class UsersTests
     }
 
     /**
-     * @return mixed
+     * @return Test
      */
     public function gettest_id()
     {
@@ -149,7 +169,7 @@ class UsersTests
     /**
      * @return mixed
      */
-    public function getUserId()
+    public function getuser_id()
     {
         return $this->user_id;
     }
