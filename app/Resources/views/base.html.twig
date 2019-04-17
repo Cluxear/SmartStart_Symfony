@@ -121,6 +121,7 @@
                                             <li><a href="pages-contact.html">Contact</a></li>
                                         </ul>
                                     </li>
+                                    <li><a href="{{ path('reclamation_Reclamation', { id:app.user.id}) }}" class="current">Reclamer</a>
 
                                 </ul>
                             </nav>
@@ -242,7 +243,7 @@
                                         </div>
 
                                             <ul class="user-menu-small-nav">
-                                                <li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+                                                <li><a href="{{ path('dashboard') }}"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
                                                 <li><a href="dashboard-settings.html"><i class="icon-material-outline-settings"></i> Settings</a></li>
                                                 <li >
                                                     <a href="{{ path('fos_user_security_logout') }}">

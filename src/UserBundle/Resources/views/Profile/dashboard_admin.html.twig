@@ -1,44 +1,6 @@
-{%  extends('base.html.twig') %}
-{% block notifications %}
-    <div class="header-notifications">
-        <!-- Trigger -->
-        <div class="header-notifications-trigger">
-            <a href="#"><i class="icon-feather-bell"></i><span>{{ count }}</span></a>
-        </div>
-
-        <!-- Dropdown -->
-        <div class="header-notifications-dropdown">
-
-            <div class="header-notifications-headline">
-                <h4>Notifications</h4>
-                <button class="mark-as-read ripple-effect-dark" title="Mark all as read" data-tippy-placement="left">
-                    <i class="icon-feather-check-square"></i>
-                </button>
-            </div>
-
-            <div class="header-notifications-content">
-                <div class="header-notifications-scroll" data-simplebar>
-                    <ul>
-                        {% for notification in notifications %}
-                        <!-- Notification -->
-                        <li class="notifications-not-read">
-                            <a href="dashboard-manage-candidates.html">
-                                <span class="notification-icon"><i class="icon-material-outline-group"></i></span>
-                                <span class="notification-text">
-													<strong>{{ notification.message }}</strong> applied for a job <span class="color">Full Stack Software Engineer</span>
-                                </span>
-                            </a>
-                        </li>
-                        {% endfor  %}
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-{% endblock %}
+{% extends 'base.html.twig' %}
 {% block content %}
+
     <!-- Dashboard Container -->
     <div class="dashboard-container">
 
@@ -85,16 +47,9 @@
                                         <li><a href="dashboard-post-a-task.html">Post a Task</a></li>
                                     </ul>
                                 </li>
-
-                                <li><a href="#"><i class="icon-material-outline-assignment"></i>  Tests </a>
-                                    <ul>
-                                        <li><a href="{{ path('freelancer_tests') }}">Exams<span class="nav-tag">2</span></a></li>
-                                        <li><a href="">QCM<span class="nav-tag">4</span></a></li>
-                                    </ul>
-                                </li>
                                 <li><a href="#"><i class="icon-material-outline-assignment"></i>  Reclamations </a>
                                     <ul>
-                                        <li><a href="{{ path('userdash') }}">Reclamations<span class="nav-tag">2</span></a></li>
+                                        <li><a href="{{ path('reclamation_display') }}">Reclamation<span class="nav-tag"> 2</span></a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -426,5 +381,4 @@
 
     </div>
     <!-- Dashboard Container / End -->
-
 {% endblock %}

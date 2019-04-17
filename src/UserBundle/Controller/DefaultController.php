@@ -33,6 +33,9 @@ class DefaultController extends Controller
         elseif (in_array('ROLE_TESTER',$roles)) {
             return $this->render("@FOSUser\Profile\dashboard_tester.html.twig");
         }
+        elseif (in_array('ROLE_ADMIN',$roles)){
+            return $this->render("@FOSUser\Profile\dashboard_admin.html.twig");
+        }
     }
     /**
      * @Route("/allSubmittedExams" , name="correct_exam")

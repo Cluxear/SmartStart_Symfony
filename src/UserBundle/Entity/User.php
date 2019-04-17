@@ -4,14 +4,17 @@ namespace UserBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Mgilet\NotificationBundle\Annotation\Notifiable;
+use Mgilet\NotificationBundle\NotifiableInterface;
 
 /**
  * User
  *
  * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @Notifiable(name="fos_user")
  */
-class User extends BaseUser
+class User extends BaseUser implements NotifiableInterface
 {
     /**
      * @var int
@@ -28,16 +31,10 @@ class User extends BaseUser
      */
     protected $completion_rate;
 
-    /**
-     * @ORM\OneToMany(targetEntity="\UserBundle\Entity\User", mappedBy="user_id")
-     *
-     */
-    private $reclamations;
 
 
     public function __construct() {
         parent::__construct();
-        $this->reclamations = new ArrayCollection();
     }
 
 
