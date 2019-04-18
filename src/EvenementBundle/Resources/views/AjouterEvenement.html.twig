@@ -1,7 +1,121 @@
 {% extends 'base.html.twig' %}
 {% block content %}
 
-    {{ form_start(form) }}
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner" >
 
-    {{ form_end(form) }}
+            <!-- Dashboard Headline -->
+            <div class="dashboard-headline">
+                <h3>Post an Event</h3>
+
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                        <li>Post an Event</li>
+                    </ul>
+                </nav>
+            </div>
+
+            {{ form_start(form) }}
+
+            <!-- Row -->
+            <div class="row">
+
+                <!-- Dashboard Box -->
+                <div class="col-xl-12">
+                    <div class="dashboard-box margin-top-0">
+
+                        <!-- Headline -->
+                        <div class="headline">
+                            <h3><i class="icon-feather-folder-plus"></i> Event Submission Form</h3>
+                        </div>
+
+                        <div class="content with-padding padding-bottom-10">
+                            <div class="row">
+
+                                <div class="col-xl-4">
+                                    <div class="submit-field">
+                                        <h5>Event Name</h5>
+                                        {{ form_widget(form.titre) }}
+                                        {{ form_errors(form.titre) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-8">
+                                    <div class="submit-field">
+                                        <h5>Category</h5>
+                                        {{ form_widget(form.secteur) }}
+                                        {{ form_errors(form.secteur) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12">
+                                    <div class="submit-field">
+                                        <h5>Describe Your Event</h5>
+                                        {{ form_widget(form.description) }}
+                                        {{ form_errors(form.description) }}
+                                        <div class="uploadButton margin-top-30">
+                                            <input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple/>
+                                            <label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
+                                            <span class="uploadButton-file-name">Images or documents that might be helpful in describing your project</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12">
+                                    <div class="submit-field">
+                                        <div class="row">
+
+                                            <div class="col-xl-4">
+                                                <div class="input-with-icon">
+                                                    <h5>What is your estimated budget?</h5>
+                                                    {{ form_widget(form.budget) }}
+                                                    {{ form_errors(form.budget) }}
+                                                    <i class="currency">TND</i>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-4">
+                                                <div class="submit-field">
+                                                    <h5>Starting Date</h5>
+                                                    {{ form_widget(form.date_debut) }}
+                                                    {{ form_errors(form.date_debut) }}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-4">
+                                                <div class="submit-field">
+                                                    <h5>How long will the Event Last?</h5>
+                                                    {{ form_widget(form.duree) }}
+                                                    {{ form_errors(form.duree) }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    {{ form_widget(form.save) }}
+                </div>
+
+
+
+            </div>
+            <!-- Row / End -->
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+    <!-- Dashboard Content / End -->
+
 {% endblock %}
+

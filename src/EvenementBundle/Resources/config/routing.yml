@@ -4,3 +4,6 @@ evenement_homepage:
 ajouter_evenement:
     path: /ajouter_evenement
     defaults: { _controller: EvenementBundle:Default:AddEvent }
+afficher_evenement:
+    path: /afficher_evenement
+    defaults: { _controller: EvenementBundle:Default:ReadEvent }

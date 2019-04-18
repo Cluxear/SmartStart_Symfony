@@ -27,18 +27,35 @@ class EvenementType extends AbstractType
         $builder
             ->add('titre', TextType::class, [
                 'required' => true,
-                'constraints' => [new Length(['max' => 50])]
+                'constraints' => [new Length(['max' => 50])],
+                'attr' => [
+                    'class' => 'with-border',
+                    'placeholder' => 'e.g. build me a website'
+                ]
             ])
             ->add('secteur', ChoiceType::class, [
                 'choices' => [
-                    'DevWeb' => 'DevWeb',
-                    'DevMobile' => 'DevMobile',
-                    'Design' => 'Design',
+                    'Web Development' => 'Web Development',
+                    'Mobile Development' => 'Mobile Development',
+                    'Data Analytics' => 'Data Analytics',
+                    'Design & Creative' => 'Design & Creative',
+                    'Software Developing' => 'Software Developing',
+                    'IT & Networking' => 'IT & Networking',
                 ],
+                'attr' => [
+                    'class' => 'selectpicker with-border',
+                    'data-size' => '4',
+                    'title' => 'Select Category'
+                ]
             ])
             ->add('description', TextareaType::class, [
                 'required' => true,
-                'constraints' => [new Length(['min' => 100])]
+                'constraints' => [new Length(['min' => 100])],
+                'attr' =>  [
+                    'cols' => '30',
+                    'rows' => '5',
+                    'class' => 'with-border'
+                ]
             ])
             ->add('budget', NumberType::class, [
                 'required' => true,
@@ -47,14 +64,23 @@ class EvenementType extends AbstractType
                     'max' => 5000.000,
                     'minMessage' => 'Vous devez entrer un budget superieur a 10',
                     'maxMessage' => 'Vous devez entrer un budget inferieur a 5000',
-                ])]
+                ])],
+                'attr' => [
+                    'class' => 'with-border',
+                    'type' => 'text',
+                    'placeholder' => 'Budget'
+                ]
                 ])
             ->add('date_debut', DateType::class, [
                 'required' => true,
                 'constraints' => [new Assert\Range([
                     'min' => 'now',
                     'minMessage' => 'Vous devez entrer une date superieur a aujourdhui',
-                ])]
+                ])],
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'with-border',
+                ]
             ])
             ->add('duree',NumberType::class, [
                 'required' => true,
@@ -63,9 +89,20 @@ class EvenementType extends AbstractType
                     'max' => 7,
                     'minMessage' => 'Vous devez entrer une duree superieur a 1',
                     'maxMessage' => 'Vous devez entrer une duree inferieur a 7'
-                ])]
+                ])],
+                'attr' => [
+                    'class' => 'with-border',
+                    'type' => 'number',
+                    'placeholder' => 'Duration'
+                ]
             ])
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, [
+                'label' => 'Post an Event',
+                'attr' => [
+                    'href' => '#',
+                    'class' => 'button ripple-effect big margin-top-30',
+                ]
+            ])
         ;
     }
 }

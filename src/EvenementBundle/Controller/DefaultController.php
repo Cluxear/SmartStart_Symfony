@@ -20,6 +20,27 @@ class DefaultController extends Controller
 
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            /**
+             * @var $submissions Evenement
+             */
+            $submissions = $form->getData();
+            $submissions->setUserId($this->getUser());
+            $entityManager->persist($submissions);
+            $entityManager->flush();
+            return $this->redirectToRoute('dashboard');
+        }
+
         return $this->render('@Evenement/AjouterEvenement.html.twig', array('form'=> $form->createView()));
     }
+    /**
+     * @Route("/afficher_evenement", name="afficher_evenement")
+     */
+    public function readEventAction()
+    {
+
+    }
+
 }
