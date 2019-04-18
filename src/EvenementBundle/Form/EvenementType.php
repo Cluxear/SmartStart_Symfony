@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class EvenementType extends AbstractType
 {
@@ -33,16 +34,37 @@ class EvenementType extends AbstractType
                     'DevWeb' => 'DevWeb',
                     'DevMobile' => 'DevMobile',
                     'Design' => 'Design',
-
                 ],
             ])
             ->add('description', TextareaType::class, [
                 'required' => true,
                 'constraints' => [new Length(['min' => 100])]
             ])
-            ->add('budget', NumberType::class)
-            ->add('date_debut', DateType::class)
-            ->add('duree',NumberType::class)
+            ->add('budget', NumberType::class, [
+                'required' => true,
+                'constraints' => [new Assert\Range([
+                    'min' => 10.000,
+                    'max' => 5000.000,
+                    'minMessage' => 'Vous devez entrer un budget superieur a 10',
+                    'maxMessage' => 'Vous devez entrer un budget inferieur a 5000',
+                ])]
+                ])
+            ->add('date_debut', DateType::class, [
+                'required' => true,
+                'constraints' => [new Assert\Range([
+                    'min' => 'now',
+                    'minMessage' => 'Vous devez entrer une date superieur a aujourdhui',
+                ])]
+            ])
+            ->add('duree',NumberType::class, [
+                'required' => true,
+                'constraints' => [new Assert\Range([
+                    'min' => 1,
+                    'max' => 7,
+                    'minMessage' => 'Vous devez entrer une duree superieur a 1',
+                    'maxMessage' => 'Vous devez entrer une duree inferieur a 7'
+                ])]
+            ])
             ->add('save', SubmitType::class)
         ;
     }

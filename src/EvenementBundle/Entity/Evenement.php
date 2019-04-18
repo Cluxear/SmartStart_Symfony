@@ -36,6 +36,7 @@ class Evenement
     private $description;
     /**
      * @ORM\Column(name="budget", type="float",nullable=true)
+     *
      */
     private $budget;
     /**

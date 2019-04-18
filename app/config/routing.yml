@@ -3,6 +3,11 @@ user:
     type:     annotation
     prefix:   /
 
+evenement:
+    resource: "@EvenementBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
