@@ -3,9 +3,17 @@
 namespace EvenementBundle\Controller;
 
 use EvenementBundle\Entity\Evenement;
+use EvenementBundle\Entity\Participation;
 use EvenementBundle\Form\EvenementType;
+use EvenementBundle\Form\ParticipationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
+use EvenementBundle\Service\FileUploader;
+
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesser;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\FormFactory;
 
@@ -47,10 +55,35 @@ class DefaultController extends Controller
     /**
      * @Route("/afficher_evenement{eventId}", name="afficher_evenement")
      */
-    public function renderEventAction($eventId)
+    public function renderEventAction($eventId, Request $request)
     {
         $evenement = $this->getDoctrine()->getRepository(Evenement::class)->find($eventId);
-        return $this->render('@Evenement/AfficherEvenement.html.twig', array('evenement' => $evenement));
+
+        $participation = new Participation();
+
+        $form = $this->createForm(ParticipationType::class, $participation);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            /**
+             * @var $submissions Participation
+             */
+            $submissions = $form->getData();
+
+            //$file = $submissions->getFichier();
+            //$fileName = $fileUploader->upload($file);
+            //$submissions->setBrochure($fileName);
+
+            $submissions->setUserId($this->getUser());
+            $entityManager->persist($submissions);
+            $entityManager->flush();
+            return $this->redirectToRoute('dashboard');
+        }
+
+        return $this->render('@Evenement/AfficherEvenement.html.twig', array('evenement' => $evenement, 'form'=> $form->createView()));
     }
+
+
 
 }
