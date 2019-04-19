@@ -36,11 +36,21 @@ class DefaultController extends Controller
         return $this->render('@Evenement/AjouterEvenement.html.twig', array('form'=> $form->createView()));
     }
     /**
-     * @Route("/afficher_evenement", name="afficher_evenement")
+     * @Route("/evenements_list", name="evenements_list")
      */
-    public function readEventAction()
+    public function listEventsAction()
     {
+        $evenements = $this->getDoctrine()->getRepository(Evenement::class)->findAll();
 
+        return $this->render('@Evenement/EvenementsList.html.twig', array('eventsList' => $evenements));
+    }
+    /**
+     * @Route("/afficher_evenement{eventId}", name="afficher_evenement")
+     */
+    public function renderEventAction($eventId)
+    {
+        $evenement = $this->getDoctrine()->getRepository(Evenement::class)->find($eventId);
+        return $this->render('@Evenement/AfficherEvenement.html.twig', array('evenement' => $evenement));
     }
 
 }

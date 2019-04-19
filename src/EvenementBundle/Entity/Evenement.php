@@ -102,6 +102,13 @@ class Evenement
     {
         return $this->date_debut;
     }
+    /**
+     * @return mixed
+     */
+    public function getdate_debut()
+    {
+        return $this->date_debut;
+    }
 
     /**
      * @return mixed

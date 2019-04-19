@@ -1,9 +1,12 @@
 evenement_homepage:
     path:     /
     defaults: { _controller: EvenementBundle:Default:index }
-ajouter_evenement:
-    path: /ajouter_evenement
-    defaults: { _controller: EvenementBundle:Default:AddEvent }
-afficher_evenement:
-    path: /afficher_evenement
-    defaults: { _controller: EvenementBundle:Default:ReadEvent }
+
+evenements_list:
+    path: /evenements_list
+    defaults: { _controller: EvenementBundle:Default:ListEvents }
+afficher_evnement:
+    path: /afficher_evenement/{number}
+    defaults: { _controller: EvenementBundle:Default:RenderEvent }
+    requirements:
+        number: \d+
